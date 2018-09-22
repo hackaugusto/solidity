@@ -751,6 +751,24 @@ BOOST_AUTO_TEST_CASE(division_truncates_correctly)
 	)";
 	CHECK_SUCCESS_NO_WARNINGS(text);
 }
+BOOST_AUTO_TEST_CASE(regression_test)
+{
+	string text = R"(
+		library Test {
+			function test(bytes32[] memory _proof)
+				internal
+				pure
+			{
+				bytes32 computedHash;
+
+				for (uint256 i = 0; i < 1; i++) {
+					computedHash = _proof[0];
+				}
+			}
+		}
+	)";
+	CHECK_SUCCESS(text);
+}
 
 BOOST_AUTO_TEST_SUITE_END()
 
