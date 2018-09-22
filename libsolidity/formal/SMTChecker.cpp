@@ -868,7 +868,8 @@ void SMTChecker::createExpr(Expression const& _e)
 			m_expressions.emplace(&_e, m_interface->newBool(uniqueSymbol(_e)));
 			break;
 		default:
-			solUnimplementedAssert(false, "Type not implemented.");
+			// Create an integer in the SMT solver, to match the fallback type
+			m_expressions.emplace(&_e, m_interface->newInteger(uniqueSymbol(_e)));
 		}
 	}
 }
